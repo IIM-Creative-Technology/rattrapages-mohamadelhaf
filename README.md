@@ -46,3 +46,10 @@ created the categories.vue component
 adding the specefic routes for the categories page in web.php
 created the categotiesLayout.vue
 
+created cart controller
+created cart.js
+created cart.vue 
+created the tables cart_table, and cart_items_table
+did the migrations
+
+
