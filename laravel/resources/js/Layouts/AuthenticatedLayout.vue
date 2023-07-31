@@ -1,15 +1,3 @@
-<script setup>
-import { ref } from 'vue';
-import ApplicationLogo from '@/Components/ApplicationLogo.vue';
-import Dropdown from '@/Components/Dropdown.vue';
-import DropdownLink from '@/Components/DropdownLink.vue';
-import NavLink from '@/Components/NavLink.vue';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
-import { Link } from '@inertiajs/vue3';
-
-const showingNavigationDropdown = ref(false);
-</script>
-
 <template>
     <div>
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
@@ -21,9 +9,7 @@ const showingNavigationDropdown = ref(false);
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center">
                                 <Link :href="route('dashboard')">
-                                    <ApplicationLogo
-                                        class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200"
-                                    />
+                                <ApplicationLogo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
                                 </Link>
                             </div>
 
@@ -41,23 +27,15 @@ const showingNavigationDropdown = ref(false);
                                 <Dropdown align="right" width="48">
                                     <template #trigger>
                                         <span class="inline-flex rounded-md">
-                                            <button
-                                                type="button"
-                                                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150"
-                                            >
+                                            <button type="button"
+                                                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
                                                 {{ $page.props.auth.user.name }}
 
-                                                <svg
-                                                    class="ml-2 -mr-0.5 h-4 w-4"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 20 20"
-                                                    fill="currentColor"
-                                                >
-                                                    <path
-                                                        fill-rule="evenodd"
+                                                <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd"
                                                         d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                        clip-rule="evenodd"
-                                                    />
+                                                        clip-rule="evenodd" />
                                                 </svg>
                                             </button>
                                         </span>
@@ -75,31 +53,17 @@ const showingNavigationDropdown = ref(false);
 
                         <!-- Hamburger -->
                         <div class="-mr-2 flex items-center sm:hidden">
-                            <button
-                                @click="showingNavigationDropdown = !showingNavigationDropdown"
-                                class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out"
-                            >
+                            <button @click="showingNavigationDropdown = !showingNavigationDropdown"
+                                class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out">
                                 <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                                     <path
-                                        :class="{
-                                            hidden: showingNavigationDropdown,
-                                            'inline-flex': !showingNavigationDropdown,
-                                        }"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M4 6h16M4 12h16M4 18h16"
-                                    />
+                                        :class="{ hidden: showingNavigationDropdown, 'inline-flex': !showingNavigationDropdown }"
+                                        stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 6h16M4 12h16M4 18h16" />
                                     <path
-                                        :class="{
-                                            hidden: !showingNavigationDropdown,
-                                            'inline-flex': showingNavigationDropdown,
-                                        }"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M6 18L18 6M6 6l12 12"
-                                    />
+                                        :class="{ hidden: !showingNavigationDropdown, 'inline-flex': showingNavigationDropdown }"
+                                        stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M6 18L18 6M6 6l12 12" />
                                 </svg>
                             </button>
                         </div>
@@ -107,10 +71,7 @@ const showingNavigationDropdown = ref(false);
                 </div>
 
                 <!-- Responsive Navigation Menu -->
-                <div
-                    :class="{ block: showingNavigationDropdown, hidden: !showingNavigationDropdown }"
-                    class="sm:hidden"
-                >
+                <div :class="{ block: showingNavigationDropdown, hidden: !showingNavigationDropdown }" class="sm:hidden">
                     <div class="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                             Dashboard
@@ -136,17 +97,89 @@ const showingNavigationDropdown = ref(false);
                 </div>
             </nav>
 
-            <!-- Page Heading -->
-            <header class="bg-white dark:bg-gray-800 shadow" v-if="$slots.header">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    <slot name="header" />
-                </div>
-            </header>
-
             <!-- Page Content -->
             <main>
-                <slot />
+                <div class="flex flex-wrap">
+                    <!-- Info Column -->
+                    <div class="w-full md:w-1/3 bg-white dark:bg-gray-800 border-r border-gray-100 dark:border-gray-700"
+                        style="min-height: 100vh;">
+                        <div class="p-4 flex flex-col justify-between h-full">
+                            <!-- Logo and Title -->
+                            <div class="logo-and-title flex items-center justify-center mb-4">
+                                <img class="logo" src="/path/to/your/logo.png" alt="Logo">
+                                <h5 class="text-2xl font-semibold ml-2">{{ Title }}</h5>
+                            </div>
+                            <!-- Address Section -->
+                            <div class="address my-4">
+                                <p class="location">{{ Location }}</p>
+                                <p class="address-details">{{ Rue }}</p>
+                                <p class="address-details">{{ Cite }}</p>
+                                <p class="address-details">{{ codePostal }}</p>
+                            </div>
+                            <!-- Contact Info Section -->
+                            <div class="contact my-4">
+                                <p class="phone">{{ numero }}</p>
+                                <p class="languages">{{ Lang }}</p>
+                            </div>
+                            <!-- Menu Links Section -->
+                            <div class="menu-links my-4">
+                                <p class="font-bold"><a href="#info">{{ info }}</a></p>
+                                <p class="font-bold"><a href="#menu">{{ menu }}</a></p>
+                                <p class="font-bold"><a href="#reviews">{{ reviews }}</a></p>
+                                <p class="font-bold"><a href="#links">{{ links }}</a></p>
+                            </div>
+                            <!-- Commencer Button -->
+                            <div class="w-full">
+                                <button class="get-started w-full bg-orange-500 text-white py-2 px-4 rounded-lg">{{
+                                    Commencer }}</button>
+                            </div>
+                            <!-- Add more info elements as needed -->
+                        </div>
+                    </div>
+
+
+
+
+                    <!-- Picture Section -->
+                    <div class="w-full md:w-2/3">
+                        <img :src="imageUrl" :alt="imageAlt" class="w-full h-auto">
+                    </div>
+                </div>
             </main>
         </div>
     </div>
 </template>
+  
+<script setup>
+import { ref } from 'vue';
+import ApplicationLogo from '@/Components/ApplicationLogo.vue';
+import Dropdown from '@/Components/Dropdown.vue';
+import DropdownLink from '@/Components/DropdownLink.vue';
+import NavLink from '@/Components/NavLink.vue';
+import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
+import { Link } from '@inertiajs/vue3';
+
+const showingNavigationDropdown = ref(false);
+
+const Logo = '';
+const Title = 'OKITO';
+const Location = 'LePeletier';
+const Lang = 'EN FR ZH DE IT ES NL';
+const Rue = '55 Rue du Faubourg';
+const Cite = 'Montmartre';
+const codePostal = '75009 Paris';
+const numero = '01 40 16 09 23';
+const info = 'INFO';
+const menu = 'MENU';
+const reviews = 'REVIEWS';
+const links = 'OKITO';
+const Commencer = 'Commencer';
+
+const imageUrl = '/path/to/your/image.jpg'; // Replace with the actual image URL
+const imageAlt = 'Picture'; // Replace with appropriate alt text for the image
+</script>
+  
+<style>
+/* ... (unchanged) ... */
+</style>
+  
