@@ -130,8 +130,12 @@
                             </div>
                             <!-- Commencer Button -->
                             <div class="w-full">
-                                <button class="get-started w-full bg-orange-500 text-white py-2 px-4 rounded-lg">{{
-                                    Commencer }}</button>
+                                <!-- Use the Link component to navigate to the categories route -->
+                                <Link :href="route('categories')">
+                                <button class="get-started w-full bg-orange-500 text-white py-2 px-4 rounded-lg">
+                                    {{ Commencer }}
+                                </button>
+                                </Link>
                             </div>
                             <!-- Add more info elements as needed -->
                         </div>
