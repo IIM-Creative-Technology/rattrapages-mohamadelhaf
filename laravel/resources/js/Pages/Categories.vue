@@ -5,23 +5,44 @@
         <!-- Render each category as a card -->
         <div v-for="category in categories" :key="category.id" class="category-card">
           <h2 class="text-xl font-semibold">{{ category.name }}</h2>
-          <!-- You can add additional information or buttons related to each category here -->
+          <button v-on:click="addCategoryToCart(category)">Add to Cart</button>
         </div>
       </div>
+      <!-- Add the button or link to the cart page -->
+      <a :href="route('cart')" class="btn-open-cart mt-4">Open Cart</a>
     </div>
   </template>
   
-  <script setup>
-  import { ref } from 'vue';
+  <script>
+  import { useCart } from '../Components/Cart';
   import { Link } from '@inertiajs/inertia-vue3';
   
-  const categories = ref([
-    { id: 1, name: 'Entree' },
-    { id: 2, name: 'Maki' },
-    { id: 3, name: 'Sushi' },
-    { id: 4, name: 'Desserts' },
-    { id: 5, name: 'Boisson' },
-  ]);
+  export default {
+    props: {
+      categories: {
+        type: Array,
+        required: true,
+      },
+    },
+    setup() {
+      const { addToCart } = useCart();
+  
+      const addCategoryToCart = (category) => {
+        addToCart({
+          id: category.id,
+          name: category.name,
+        });
+        // You can add additional logic here, such as showing a notification that the category was added to the cart
+      };
+  
+      return {
+        addCategoryToCart,
+      };
+    },
+    components: {
+      Link, // Register the Link component for use in the template
+    },
+  };
   </script>
   
   <style>
@@ -62,5 +83,18 @@
   }
   
   /* Add more media queries for larger screens if needed */
+  
+  .btn-cart {
+    padding: 0.75rem 1rem;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .btn-cart:hover {
+    background-color: #45a049;
+  }
   </style>
   

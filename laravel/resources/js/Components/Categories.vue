@@ -5,7 +5,7 @@
       <!-- Render each category as a card -->
       <div v-for="category in categories" :key="category.id" class="bg-white rounded-lg shadow-md p-4">
         <h2 class="text-lg font-semibold">{{ category.name }}</h2>
-        <!-- You can add additional information or buttons related to each category here -->
+        
       </div>
     </div>
   </div>
@@ -14,6 +14,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { usePage } from '@inertiajs/inertia-vue3';
+
 
 // Create a ref to store the categories
 const categories = ref([]);
@@ -30,6 +31,15 @@ onMounted(async () => {
     console.error('Categories not found in the page props.');
   }
 });
+
+// Import the addToCart function from the useCart hook
+// const { addToCart } = useCart();
+
+// Function to handle adding a category to the cart
+// function addCategoryToCart(category) {
+//   addToCart(category);
+//   // You can add additional logic here, such as showing a notification that the category was added to the cart
+// }
 </script>
 
 <style>

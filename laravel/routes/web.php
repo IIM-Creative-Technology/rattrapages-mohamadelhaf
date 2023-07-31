@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TableController;
 use App\Http\Controllers\CategoriesController; // Import the CategoriesController
+use App\Http\Controllers\CartController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -27,12 +28,18 @@ Route::get('/', function () {
     ]);
 });
 
+
+Route::get('/cart', [CartController::class, 'index'])->name('cart');
+Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('add-to-cart');
+
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 // Route for the CategoriesController
 Route::get('/categories', [CategoriesController::class, 'index'])->name('categories');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
