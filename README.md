@@ -1,4 +1,5 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/r0yr3kAI)
+</br>
 steps:
 commands que j'ai fais;
 (cloned the project)
@@ -34,3 +35,14 @@ then  create the SelectedTable model using the following command:
 php artisan make:model SelectedTable
 then  create the tableController
 add the post route in web.php to make a post request to the database
+
+created the categories page,
+created the database for the categories using the make:migration command
+created the categoriesController.php using the make:controller command
+created the categories.php model using the make:model command
+seeding the database with data using the following command:php artisan db:seed --class=CategoriesTableSeeder
+migrating with the database,
+created the categories.vue component
+adding the specefic routes for the categories page in web.php
+created the categotiesLayout.vue
+
