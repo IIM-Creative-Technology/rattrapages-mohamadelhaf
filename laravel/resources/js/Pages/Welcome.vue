@@ -12,7 +12,7 @@
               Table Number
             </label>
             <select
-              v-model="state.selectedTableNumber" 
+              v-model="state.selectedTableNumber"
               id="tableNumber"
               class="block w-full mt-1 p-2 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg"
             >
@@ -25,20 +25,13 @@
   
           <div class="mt-6">
             <Link
-              v-if="state.selectedTableNumber" 
+              v-if="state.selectedTableNumber"
               :href="route('dashboard')"
+              @click="navigateToDashboard"
               class="block w-full p-4 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-lg cursor-pointer"
             >
               Enter
             </Link>
-            <button
-              v-else
-              type="submit"
-              class="block w-full p-4 bg-gray-500 text-white font-semibold rounded-lg cursor-not-allowed"
-              disabled
-            >
-              Enter
-            </button>
           </div>
         </div>
       </div>
@@ -48,18 +41,24 @@
   <script setup>
   import { reactive } from 'vue';
   import { Link } from '@inertiajs/inertia-vue3';
+  import axios from 'axios';
   
   const tableNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const state = reactive({
     selectedTableNumber: '',
   });
   
-  function navigateToDashboard() {
-    console.log('Selected Table:', state.selectedTableNumber);
-  
+  // Modify the function to save the selected table to the database
+  async function navigateToDashboard() {
     if (state.selectedTableNumber) {
       console.log(`User selected Table ${state.selectedTableNumber}`);
-      // Add your navigation logic here (if using Inertia.js, the Link component should handle navigation)
+  
+      // Make an API request to save the selected table to the database
+      const response = await axios.post('/save-selected-table', {
+        selectedTableNumber: state.selectedTableNumber,
+      });
+  
+      console.log(response.data); // Log the response from the server
     }
   }
   </script>
