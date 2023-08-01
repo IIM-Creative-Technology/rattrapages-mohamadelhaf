@@ -63,6 +63,12 @@ added clear button in the cart to remove the items,
 added the checkout button that send the cart id to the cart table
 
 
+fixed the structure of the page, 
+clear cart on checkout
+confirmation of the checkout
+redirect to the home page on checkout
+
+
 
 
 
