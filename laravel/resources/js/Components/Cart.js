@@ -5,14 +5,17 @@ import { unref, computed, reactive } from 'vue';
 let cart = [];
 
 export async function addToCart(category) {
-  try {
-    const response = await axios.post('/add-to-cart', { category_id: category.id, category_name: category.name });
-    cart = response.data.cartItems;
-    return cart;
-  } catch (error) {
-    throw new Error('Failed to add category to cart');
+    try {
+      const response = await axios.post('/add-to-cart', { category_id: category.id });
+      cart = response.data.cartItems;
+      return {
+        cartItems: cart,
+        cartTotal: response.data.cartTotal,
+      };
+    } catch (error) {
+      throw new Error('Failed to add category to cart');
+    }
   }
-}
 
 export function useCart() {
   const cartItems = computed(() => unref(cart));

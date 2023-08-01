@@ -31,6 +31,7 @@ Route::get('/', function () {
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('add-to-cart');
+Route::get('/api/cart-items', [CartController::class, 'getCartItems']);
 
 
 Route::get('/dashboard', function () {

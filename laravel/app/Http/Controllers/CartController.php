@@ -5,19 +5,29 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\CartItem;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class CartController extends Controller
 {
     public function index()
     {
+        // Fetch all cart items from the database
         $cartItems = CartItem::all();
-        $cartTotal = $cartItems->count();
+
+        // Calculate the total count of unique categories in the cart_items table
+        $totalCategories = DB::table('cart_items')->distinct('category_id')->count();
 
         return Inertia::render('Cart', [
             'cartItems' => $cartItems,
-            'cartTotal' => $cartTotal,
+            'totalCategories' => $totalCategories,
         ]);
+    }
+
+    public function getCartItems()
+    {
+        $cartItems = CartItem::all();
+        return response()->json($cartItems);
     }
 
     public function addToCart(Request $request)
