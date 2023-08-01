@@ -7,6 +7,7 @@ use App\Http\Controllers\CartController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,10 @@ Route::get('/', function () {
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('add-to-cart');
 Route::get('/api/cart-items', [CartController::class, 'getCartItems']);
+Route::delete('api/clear-cart', [CartController::class, 'clearCart']);
+
+Route::post('/api/create-cart', [CheckoutController::class, 'createCart'])->name('create.cart');
+Route::post('/checkout/checkout', [CheckoutController::class, 'checkout'])->name('checkout.checkout');
 
 
 Route::get('/dashboard', function () {
