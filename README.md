@@ -55,6 +55,10 @@ did the migrations
 fixed the cart logic, 
 now when we press on a card category, we will see a notification that the category is successfully added to the cart, and when we open the cart_items table, we can see the category_id
 
+added items successfully to cart,
+show the total of items in the cart
+
+
 
 
 
