@@ -1,21 +1,15 @@
 <template>
-    <div class="container mx-auto mt-8">
-      <h1 class="text-3xl font-semibold mb-4 text-center">Cart</h1>
-      <div class="cart-items">
-        <div v-for="item in cartItems" :key="item.id" class="cart-item">
-          <h2 class="text-xl font-semibold">{{ item.name }}</h2>
-          <!-- You can display any other relevant information about the item here -->
-        </div>
+    <!-- Your template code for the cart page -->
+    <div class="container">
+      <h1>Cart</h1>
+      <div v-for="cartItem in cartItems" :key="cartItem.id">
+        <h2>{{ cartItem.category.name }}</h2>
+        <!-- You can display other properties of the cartItem as needed -->
       </div>
-      <div class="cart-total mt-4 text-center">
-        <p class="text-lg font-semibold">Total Items: {{ cartTotal }}</p>
-      </div>
-      <div class="cart-actions mt-4 flex justify-center">
-        <button class="btn-submit-cart" @click="submitCart">Submit Cart</button>
-        <button class="btn-empty-cart" @click="emptyCart">Empty Cart</button>
-      </div>
+      <p>Total Items: {{ cartTotal }}</p>
     </div>
   </template>
+  
   
   <script>
   import { useCart } from '../Components/Cart';
@@ -23,27 +17,25 @@
   
   export default {
     setup() {
-      const { cartItems, cartTotal, clearCart } = useCart();
+      const { cartItems, cartTotal } = useCart();
   
-      const submitCart = () => {
-        // Logic to submit the cart items
-        // For example, you can send the cart items to the server or perform any other action
-        // After successful submission, you might want to display a success message or redirect the user
-        // For now, we'll just clear the cart
-        clearCart();
-      };
+    //   const submitCart = () => {
+    //     // Logic to submit the cart items
+    //     // For example, you can send the cart items to the server or perform any other action
+    //     // After successful submission, you might want to display a success message or redirect the user
+    //     // For now, we'll just clear the cart
+    //     clearCart();
+    //   };
   
-      const emptyCart = () => {
-        // Logic to empty the cart
-        // For now, we'll just clear the cart
-        clearCart();
-      };
+    //   const emptyCart = () => {
+    //     // Logic to empty the cart
+    //     // For now, we'll just clear the cart
+    //     clearCart();
+    //   };
   
       return {
         cartItems,
-        cartTotal: cartItems.length, // Calculate the total number of items in the cart
-        submitCart,
-        emptyCart,
+        cartTotal, 
       };
     },
     components: {

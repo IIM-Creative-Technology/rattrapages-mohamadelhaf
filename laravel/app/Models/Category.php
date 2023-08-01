@@ -14,4 +14,8 @@ class Category extends Model
     ];
 
     // Add any additional custom logic or relationships here
+    public function cartItems()
+    {
+        return $this->hasMany(CartItem::class);
+    }
 }

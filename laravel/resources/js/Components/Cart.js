@@ -1,27 +1,45 @@
-import { ref, computed } from 'vue';
+// Cart.js
+import axios from 'axios';
+import { unref, computed, reactive } from 'vue';
 
-const cart = ref([]);
+let cart = [];
+
+export async function addToCart(category) {
+  try {
+    const response = await axios.post('/add-to-cart', { category_id: category.id, category_name: category.name });
+    cart = response.data.cartItems;
+    return cart;
+  } catch (error) {
+    throw new Error('Failed to add category to cart');
+  }
+}
 
 export function useCart() {
-  const addToCart = (item) => {
-    cart.value.push(item);
-  };
+  const cartItems = computed(() => unref(cart));
+  const cartTotal = computed(() => unref(cart).length);
 
-  const removeFromCart = (itemId) => {
-    cart.value = cart.value.filter(item => item.id !== itemId);
-  };
+//   const removeFromCart = async (itemId) => {
+//     try {
+//       await axios.post('/remove-from-cart', { item_id: itemId });
+//       cart = cart.filter(item => item.id !== itemId);
+//     } catch (error) {
+//       throw new Error('Failed to remove item from cart');
+//     }
+//   };
 
-  const clearCart = () => {
-    cart.value = [];
-  };
-
-  const cartItems = computed(() => cart.value);
-  const cartTotal = computed(() => cart.value.reduce((total, item) => total + item.price, 0));
+//   const clearCart = async () => {
+//     try {
+//       await axios.post('/clear-cart');
+//       cart = [];
+//     } catch (error) {
+//       throw new Error('Failed to clear cart');
+//     }
+//   };
 
   return {
     addToCart,
-    removeFromCart,
-    clearCart,
+    // removeFromCart,
+    // clearCart,
     cartItems,
     cartTotal,
   };

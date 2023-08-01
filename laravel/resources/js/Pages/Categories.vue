@@ -3,9 +3,9 @@
       <h1 class="text-3xl font-semibold mb-4 text-center">Categories</h1>
       <div class="card-container">
         <!-- Render each category as a card -->
-        <div v-for="category in categories" :key="category.id" class="category-card">
+        <div v-for="category in categories" :key="category.id" class="category-card" @click="addCategoryToCart(category)">
           <h2 class="text-xl font-semibold">{{ category.name }}</h2>
-          <button v-on:click="addCategoryToCart(category)">Add to Cart</button>
+          <!-- You can add more details of the category here if needed -->
         </div>
       </div>
       <!-- Add the button or link to the cart page -->
@@ -13,9 +13,11 @@
     </div>
   </template>
   
+  
   <script>
   import { useCart } from '../Components/Cart';
   import { Link } from '@inertiajs/inertia-vue3';
+  import { useToast } from 'vue-toastification';
   
   export default {
     props: {
@@ -26,13 +28,18 @@
     },
     setup() {
       const { addToCart } = useCart();
+      const toast = useToast();
   
-      const addCategoryToCart = (category) => {
-        addToCart({
-          id: category.id,
-          name: category.name,
-        });
-        // You can add additional logic here, such as showing a notification that the category was added to the cart
+      const addCategoryToCart = async (category) => {
+        try {
+           await addToCart(category);
+          // Assuming your addToCart function returns a response with cartItems and cartTotal
+          // If it's returning something else, adjust the following lines accordingly
+          toast.success(`${category.name} added to cart!`);
+        } catch (error) {
+          console.error('Error adding category to cart:', error);
+          toast.error('Failed to add category to cart');
+        }
       };
   
       return {
@@ -84,7 +91,7 @@
   
   /* Add more media queries for larger screens if needed */
   
-  .btn-cart {
+  .btn-open-cart {
     padding: 0.75rem 1rem;
     background-color: #4caf50;
     color: #fff;
@@ -93,7 +100,7 @@
     cursor: pointer;
   }
   
-  .btn-cart:hover {
+  .btn-open-cart:hover {
     background-color: #45a049;
   }
   </style>

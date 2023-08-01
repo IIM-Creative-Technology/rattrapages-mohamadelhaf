@@ -1,28 +1,16 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Category; // Import the Category model
 use Inertia\Inertia;
 
 class CategoriesController extends Controller
 {
     public function index()
-{
-    $categories = [
-        ['id' => 1, 'name' => 'Entree'],
-        ['id' => 2, 'name' => 'Maki'],
-        ['id' => 3, 'name' => 'Sushi'],
-        ['id' => 4, 'name' => 'Desserts'],
-        ['id' => 5, 'name' => 'Boisson'],
-    ];
+    {
+        // Fetch all categories from the database
+        $categories = Category::all();
 
-    return Inertia::render('Categories', ['categories' => $categories]);
+        return Inertia::render('Categories', ['categories' => $categories]);
+    }
 }
-
-}
-
-
-
-
-
