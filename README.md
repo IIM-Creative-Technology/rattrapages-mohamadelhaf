@@ -59,6 +59,10 @@ added items successfully to cart,
 show the total of items in the cart
 
 
+added clear button in the cart to remove the items,
+added the checkout button that send the cart id to the cart table
+
+
 
 
 
