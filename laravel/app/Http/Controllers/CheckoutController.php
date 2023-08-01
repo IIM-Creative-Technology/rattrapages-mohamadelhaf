@@ -3,6 +3,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cart;
+use Illuminate\Support\Facades\Redirect;
+
 
 class CheckoutController extends Controller
 {
@@ -47,15 +49,16 @@ class CheckoutController extends Controller
     // Method to confirm the checkout and complete the purchase
     public function checkout(Request $request)
     {
-        // Perform any necessary actions to complete the purchase and empty the cart
-        // For example, you can process payment, update inventory, etc.
-
-        // After the purchase is complete, you can empty the cart by deleting the cart record
+        // Retrieve the cart ID from the request
         $cartId = $request->input('cart_id');
+    
+        // Implement your logic for the checkout process here...
+    
+        // Assuming the checkout was successful, clear the cart
         Cart::where('cart_id', $cartId)->delete();
-
-        return response()->json([
-            'message' => 'Checkout completed successfully',
-        ]);
+    
+        // Redirect to the "Welcome" page after successful checkout
+        return Redirect::route('welcome')->with('success', 'Checkout successful! Thank you for your order.');
     }
+    
 }

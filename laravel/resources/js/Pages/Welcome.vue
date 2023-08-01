@@ -26,7 +26,7 @@
           <div class="mt-6">
             <Link
               v-if="state.selectedTableNumber"
-              :href="route('dashboard')"
+              :href="route('categories')"
               @click="navigateToDashboard"
               class="block w-full p-4 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-lg cursor-pointer"
             >

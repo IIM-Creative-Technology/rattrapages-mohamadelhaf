@@ -21,9 +21,9 @@ use App\Http\Controllers\CheckoutController;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
+    return Inertia::render('Dashboard', [
+        // 'canLogin' => Route::has('login'),
+        // 'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
@@ -36,7 +36,8 @@ Route::get('/api/cart-items', [CartController::class, 'getCartItems']);
 Route::delete('api/clear-cart', [CartController::class, 'clearCart']);
 
 Route::post('/api/create-cart', [CheckoutController::class, 'createCart'])->name('create.cart');
-Route::post('/checkout/checkout', [CheckoutController::class, 'checkout'])->name('checkout.checkout');
+// Route::post('/checkout/checkout', [CheckoutController::class, 'checkout'])->name('checkout.checkout');
+Route::post('/api/checkout', [CheckoutController::class, 'checkout'])->name('api.checkout');
 
 
 Route::get('/dashboard', function () {
@@ -45,6 +46,10 @@ Route::get('/dashboard', function () {
 
 // Route for the CategoriesController
 Route::get('/categories', [CategoriesController::class, 'index'])->name('categories');
+
+Route::get('/welcome', function () {
+    return Inertia::render('Welcome');
+})->name('welcome');
 
 
 Route::middleware('auth')->group(function () {

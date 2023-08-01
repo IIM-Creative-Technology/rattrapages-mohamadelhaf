@@ -21,16 +21,103 @@ import { Link } from '@inertiajs/inertia-vue3';
 import axios from 'axios';
 
 export default {
+  // setup() {
+  //   const cartItems = reactive([]); // Use reactive to make the cartItems reactive
+  //   let totalCategories = 0; // Declare totalCategories variable
+
+  //   // Fetch cart items from the server
+  //   const fetchCartItems = async () => {
+  //     try {
+  //       const response = await axios.get('/api/cart-items');
+  //       cartItems.length = 0; // Clear the cartItems array
+  //       cartItems.push(...response.data); // Add new items to the cartItems array
+
+  //       // Calculate the total count of unique categories in the cart_items table
+  //       totalCategories = new Set(cartItems.map((cartItem) => cartItem.category_id)).size;
+  //     } catch (error) {
+  //       console.error('Error fetching cart items:', error);
+  //     }
+  //   };
+
+  //   // Call the fetchCartItems function when the component is mounted
+  //   onMounted(fetchCartItems);
+
+  //   // Method to clear the entire cart
+  //   const clearCart = async () => {
+  //     try {
+  //       await axios.delete('/api/clear-cart');
+  //       fetchCartItems();
+  //     } catch (error) {
+  //       console.error('Error clearing cart:', error);
+  //     }
+  //   };
+
+  //   // Method to handle the checkout process
+  //   const handleCheckout = async () => {
+  //     const confirmed = window.confirm('Are you sure you want to proceed with the checkout?');
+  //     if (confirmed) {
+  //       try {
+  //         const response = await axios.post('/api/create-cart');
+  //         const cartId = response.data.cartId;
+  //         console.log('Cart ID:', cartId);
+  //         await checkout(cartId); // Call the checkout function with the cartId
+  //         resetInterface()
+  //       } catch (error) {
+  //         console.error('Error creating cart:', error);
+  //       }
+  //     }
+  //   };
+
+  //   const checkout = async (cartId) => {
+  //     try {
+  //       const response = await axios.post('/api/checkout', {
+  //         cart_id: cartId,
+  //       });
+  //       console.log('Checkout response:', response.data);
+  //       // Optionally, you can show a success notification or redirect to a success page
+  //       resetInterface(); // Call the resetInterface method after successful checkout
+  //     } catch (error) {
+  //       console.log(error)
+  //       console.error('Error during checkout:', error);
+  //       // Optionally, you can show an error notification or redirect to an error page
+  //     }
+  //   };
+
+  //   // Method to reset the cart interface to the first page
+  //   const resetInterface = async () => {
+  //     try {
+  //       // Clear the cart on the server
+  //       await axios.delete('/api/clear-cart');
+  //       // Fetch the updated cart items from the server
+  //       await fetchCartItems();
+  //       // Navigate to the Dashboard page
+  //       Link({ method: 'get', preserveScroll: true }).navigate(route('dashboard'));
+  //     } catch (error) {
+  //       console.error('Error resetting interface:', error);
+  //     }
+  //   };
+
+
+  //   return {
+  //     cartItems,
+  //     totalCategories,
+  //     clearCart,
+  //     handleCheckout,
+  //   };
+  // },
   setup() {
     const cartItems = reactive([]); // Use reactive to make the cartItems reactive
     let totalCategories = 0; // Declare totalCategories variable
+    const initialCartItems = []; // To store the initial state of cart items
 
     // Fetch cart items from the server
     const fetchCartItems = async () => {
       try {
         const response = await axios.get('/api/cart-items');
         cartItems.length = 0; // Clear the cartItems array
+        initialCartItems.length = 0; // Clear the initialCartItems array
         cartItems.push(...response.data); // Add new items to the cartItems array
+        initialCartItems.push(...response.data); // Store initial state of cart items
 
         // Calculate the total count of unique categories in the cart_items table
         totalCategories = new Set(cartItems.map((cartItem) => cartItem.category_id)).size;
@@ -60,7 +147,7 @@ export default {
           const response = await axios.post('/api/create-cart');
           const cartId = response.data.cartId;
           console.log('Cart ID:', cartId);
-          checkout(cartId); // Call the checkout function with the cartId
+          await checkout(cartId); // Call the checkout function with the cartId
         } catch (error) {
           console.error('Error creating cart:', error);
         }
@@ -74,7 +161,7 @@ export default {
         });
         console.log('Checkout response:', response.data);
         // Optionally, you can show a success notification or redirect to a success page
-        resetInterface(); // Call the resetInterface method after successful checkout
+        await resetInterface(); // Call the resetInterface method after successful checkout
       } catch (error) {
         console.error('Error during checkout:', error);
         // Optionally, you can show an error notification or redirect to an error page
@@ -82,8 +169,18 @@ export default {
     };
 
     // Method to reset the cart interface to the first page
-    const resetInterface = () => {
-      cartItems.length = 0; // Clear the cart items in the UI
+    const resetInterface = async () => {
+      try {
+        // Clear the cart on the server
+        await axios.delete('/api/clear-cart');
+        // Fetch the updated cart items from the server
+        await fetchCartItems();
+        // Navigate to the Dashboard page
+        window.location.href ='/dashboard';
+      } catch (error) {
+        
+        console.error('Error resetting interface:', error);
+      }
     };
 
     return {
@@ -112,7 +209,8 @@ export default {
 }
 
 .cart-item {
-  width: 300px; /* Set the width of each cart item */
+  width: 300px;
+  /* Set the width of each cart item */
   padding: 1rem;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -122,7 +220,8 @@ export default {
   align-items: center;
   justify-content: center;
   text-align: center;
-  margin-bottom: 1rem; /* Add margin between cart items */
+  margin-bottom: 1rem;
+  /* Add margin between cart items */
 }
 
 .cart-total {
