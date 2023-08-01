@@ -33,11 +33,16 @@ class CartController extends Controller
     public function addToCart(Request $request)
     {
         $categoryId = $request->input('category_id');
+        $name = $request->input('name'); 
 
         $category = Category::find($categoryId);
 
         if (!$category) {
             return response()->json(['message' => 'Category not found'], 404);
+        }
+        // Check if the category is already in the cart
+        if (CartItem::where('category_id', $categoryId)->exists()) {
+            return response()->json(['message' => 'Category already in cart'], 400);
         }
 
         $cartItem = new CartItem([

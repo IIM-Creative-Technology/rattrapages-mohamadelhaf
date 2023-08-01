@@ -6,16 +6,19 @@ let cart = [];
 
 export async function addToCart(category) {
     try {
-      const response = await axios.post('/add-to-cart', { category_id: category.id });
+      // Check if the category is already in the cart
+      if (cart.some(item => item.category_id === category.id)) {
+        throw new Error('Category already in cart');
+      }
+  
+      const response = await axios.post('/add-to-cart', { category_id: category.id, name: category.name });
       cart = response.data.cartItems;
-      return {
-        cartItems: cart,
-        cartTotal: response.data.cartTotal,
-      };
+      return cart;
     } catch (error) {
       throw new Error('Failed to add category to cart');
     }
   }
+  
 
 export function useCart() {
   const cartItems = computed(() => unref(cart));

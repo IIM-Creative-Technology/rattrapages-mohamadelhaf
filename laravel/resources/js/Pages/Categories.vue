@@ -32,7 +32,7 @@
   
       const addCategoryToCart = async (category) => {
         try {
-           await addToCart(category);
+            const response = await addToCart(category);
           // Assuming your addToCart function returns a response with cartItems and cartTotal
           // If it's returning something else, adjust the following lines accordingly
           toast.success(`${category.name} added to cart!`);

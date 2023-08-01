@@ -16,6 +16,7 @@ class CreateCartItemsTable extends Migration
         Schema::create('cart_items', function (Blueprint $table) {
             $table->id();
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
+            $table->string('name')->default(''); // Add a column for the category name
             // Add any other columns you need for the cart items
             $table->timestamps();
         });
