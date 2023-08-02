@@ -71,7 +71,7 @@ redirect to the home page on checkout
 made the tables dynamic,
 updated the migration file for the tables, the model and the controller, also the routes
 fetched the tables from the tables_table in the database,
-created the seeder to seed the tables_table in the database,
+created the seeder to seed the tables_table in the database: php artisan db:seed --class=CategoriesTableSeeder  ,
 added the boolean field to see if a table is reserved,
 added the pics,
 
@@ -81,5 +81,6 @@ clean code
 
 
 
+video link:https://www.loom.com/share/bee555e20c85428dbc68fecb1a9cdea9
 
 
