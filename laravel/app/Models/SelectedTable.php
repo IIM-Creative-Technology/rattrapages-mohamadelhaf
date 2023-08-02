@@ -9,7 +9,7 @@ class SelectedTable extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['table_number'];
+    protected $fillable = ['table_number', 'is_reserved'];
 
     // Add any additional custom logic or relationships here
 }

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\CheckoutController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,6 +40,10 @@ Route::post('/api/create-cart', [CheckoutController::class, 'createCart'])->name
 // Route::post('/checkout/checkout', [CheckoutController::class, 'checkout'])->name('checkout.checkout');
 Route::post('/api/checkout', [CheckoutController::class, 'checkout'])->name('api.checkout');
 
+Route::get('/tables', [TableController::class, 'getTables'])->name('tables.index');
+Route::post('/reserve-table/{tableNumber}', [TableController::class, 'reserveTable'])->name('tables.reserve');
+// Route::post('/save-selected-table', [TableController::class, 'saveSelectedTable'])->name('save-selected-table');
+
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -58,7 +63,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // New route for saving the selected table
-    Route::post('/save-selected-table', [TableController::class, 'saveSelectedTable'])->name('save-selected-table');
+  
 });
 
 require __DIR__.'/auth.php';

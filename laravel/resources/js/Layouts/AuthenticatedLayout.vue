@@ -106,7 +106,8 @@
                         <div class="p-4 flex flex-col justify-between h-full">
                             <!-- Logo and Title -->
                             <div class="logo-and-title flex items-center justify-center mb-4">
-                                <img class="logo" src="/path/to/your/logo.png" alt="Logo">
+                                <!-- <img class="logo" src="logourl" alt="Logo"> -->
+                                <img class="logo" :src="logoUrl" :alt="logoAlt" style="width: 90px; height: 90px;" >
                                 <h5 class="text-2xl font-semibold ml-2">{{ Title }}</h5>
                             </div>
                             <!-- Address Section -->
@@ -179,8 +180,9 @@ const reviews = 'REVIEWS';
 const links = 'OKITO';
 const Commencer = 'Commencer';
 
-const imageUrl = '/path/to/your/image.jpg'; // Replace with the actual image URL
+const imageUrl = ref('/pics/okito.png'); // Replace with the actual image URL
 const imageAlt = 'Picture'; // Replace with appropriate alt text for the image
+const logoUrl = ref('/pics/okito.png');
 </script>
   
 <style>
