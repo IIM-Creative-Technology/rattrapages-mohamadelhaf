@@ -75,6 +75,9 @@ created the seeder to seed the tables_table in the database,
 added the boolean field to see if a table is reserved,
 added the pics,
 
+added toastification for cart checkout and error while toast checkout
+clean code
+
 
 
 
