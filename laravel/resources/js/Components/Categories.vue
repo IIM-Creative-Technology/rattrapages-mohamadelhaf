@@ -32,16 +32,9 @@ onMounted(async () => {
   }
 });
 
-// Import the addToCart function from the useCart hook
-// const { addToCart } = useCart();
 
-// Function to handle adding a category to the cart
-// function addCategoryToCart(category) {
-//   addToCart(category);
-//   // You can add additional logic here, such as showing a notification that the category was added to the cart
-// }
 </script>
 
 <style>
-/* Your custom styles for the categories page */
+
 </style>

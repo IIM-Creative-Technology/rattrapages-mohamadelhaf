@@ -180,8 +180,8 @@ const reviews = 'REVIEWS';
 const links = 'OKITO';
 const Commencer = 'Commencer';
 
-const imageUrl = ref('/pics/okito.png'); // Replace with the actual image URL
-const imageAlt = 'Picture'; // Replace with appropriate alt text for the image
+const imageUrl = ref('/pics/okito.png'); 
+const imageAlt = 'Picture'; 
 const logoUrl = ref('/pics/okito.png');
 </script>
   

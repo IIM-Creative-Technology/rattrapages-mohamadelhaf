@@ -1,10 +1,8 @@
 <template>
-  <!-- Your template code for the cart page -->
   <div class="container">
     <h1 class="text-3xl font-semibold mb-4 text-center">Cart</h1>
     <div v-for="cartItem in cartItems" :key="cartItem.id">
       <h2>{{ cartItem.name }}</h2>
-      <!-- You can display other properties of the cartItem as needed -->
     </div>
     <p>Total Items: {{ cartItems.length }}</p>
     <button class="btn-clear" @click="clearCart">Clear Cart</button>
@@ -18,6 +16,7 @@
 import { reactive, onMounted } from 'vue';
 import { Link } from '@inertiajs/inertia-vue3';
 import axios from 'axios';
+import { useToast } from 'vue-toastification';
 
 export default {
   
@@ -25,6 +24,7 @@ export default {
     const cartItems = reactive([]); 
     let totalCategories = 0; 
     const initialCartItems = []; 
+    const toast = useToast();
 
     // Fetch cart items from the server
     const fetchCartItems = async () => {
@@ -49,9 +49,11 @@ export default {
     const clearCart = async () => {
       try {
         await axios.delete('/api/clear-cart');
+        toast.success(`Cart Cleared!`);
         fetchCartItems();
       } catch (error) {
         console.error('Error clearing cart:', error);
+        toast.error('Failed to Clear Cart');
       }
     };
 
@@ -63,8 +65,10 @@ export default {
           const response = await axios.post('/api/create-cart');
           const cartId = response.data.cartId;
           console.log('Cart ID:', cartId);
+          toast.success(`${cartId} checkout successful!`);
           await checkout(cartId); 
         } catch (error) {
+          toast.error('Failed to checkout');
           console.error('Error creating cart:', error);
         }
       }
@@ -76,11 +80,11 @@ export default {
           cart_id: cartId,
         });
         console.log('Checkout response:', response.data);
-        // Optionally, you can show a success notification or redirect to a success page
-        await resetInterface(); // Call the resetInterface method after successful checkout
+       
+        await resetInterface(); 
       } catch (error) {
         console.error('Error during checkout:', error);
-        // Optionally, you can show an error notification or redirect to an error page
+       
       }
     };
 
@@ -107,15 +111,13 @@ export default {
     };
   },
   components: {
-    Link, // Register the Link component for use in the template
+    Link, 
   },
 };
 </script>
 
 <style>
-/* Your custom styles for the cart page */
 .container {
-  /* Add container styles if needed */
 }
 
 .cart-items {
@@ -126,7 +128,6 @@ export default {
 
 .cart-item {
   width: 300px;
-  /* Set the width of each cart item */
   padding: 1rem;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -137,7 +138,6 @@ export default {
   justify-content: center;
   text-align: center;
   margin-bottom: 1rem;
-  /* Add margin between cart items */
 }
 
 .cart-total {
@@ -174,21 +174,4 @@ export default {
   background-color: #45a049;
 }
 
-/* .btn-submit-cart,
-.btn-empty-cart {
-  padding: 0.75rem 1rem;
-  margin: 0.5rem;
-  background-color: #4caf50;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.btn-submit-cart:hover,
-.btn-empty-cart:hover {
-  background-color: #45a049;
-} */
-
-/* Add more media queries for larger screens if needed */
 </style>

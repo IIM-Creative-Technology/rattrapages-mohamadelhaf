@@ -50,10 +50,10 @@ const state = reactive({
 // Fetch the table numbers from the backend API
 async function fetchTableNumbers() {
   try {
-    const response = await axios.get(route('tables.index')); // Replace with your API endpoint
-    tableNumbers.value = response.data; // Update the tableNumbers with the fetched data
+    const response = await axios.get(route('tables.index')); 
+    tableNumbers.value = response.data; 
   } catch (error) {
-    console.error(error); // Log any errors that occur during the API request
+    console.error(error); 
   }
 }
 
@@ -69,17 +69,17 @@ async function reserveTable() {
     try {
       const response = await axios.post(route('tables.reserve', { tableNumber: state.selectedTableNumber }));
      
-      console.log(response.data.message); // Log the response from the server
+      console.log(response.data.message); 
 
-      // Redirect to the categories page upon successful reservation
+      
       window.location.href = route('categories');
     } catch (error) {
-      console.error(error); // Log any errors that occur during the reservation process
+      console.error(error);
     }
   }
 }
 </script>
 
 <style>
-/* Your style code */
+
 </style>

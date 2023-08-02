@@ -37,12 +37,10 @@ Route::get('/api/cart-items', [CartController::class, 'getCartItems']);
 Route::delete('api/clear-cart', [CartController::class, 'clearCart']);
 
 Route::post('/api/create-cart', [CheckoutController::class, 'createCart'])->name('create.cart');
-// Route::post('/checkout/checkout', [CheckoutController::class, 'checkout'])->name('checkout.checkout');
 Route::post('/api/checkout', [CheckoutController::class, 'checkout'])->name('api.checkout');
 
 Route::get('/tables', [TableController::class, 'getTables'])->name('tables.index');
 Route::post('/reserve-table/{tableNumber}', [TableController::class, 'reserveTable'])->name('tables.reserve');
-// Route::post('/save-selected-table', [TableController::class, 'saveSelectedTable'])->name('save-selected-table');
 
 
 Route::get('/dashboard', function () {

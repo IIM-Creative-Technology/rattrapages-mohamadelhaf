@@ -14,10 +14,5 @@ class Cart extends Model
     ];
 
     protected $table = 'cart';
-    // Define any relationships with other models, if needed
-    // For example, if a cart belongs to a user, you can define a user relationship like this:
-    // public function user()
-    // {
-    //     return $this->belongsTo(User::class);
-    // }
+
 }

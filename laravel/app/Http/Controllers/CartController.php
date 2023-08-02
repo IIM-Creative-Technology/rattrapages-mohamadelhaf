@@ -33,7 +33,7 @@ class CartController extends Controller
     public function addToCart(Request $request)
     {
         $categoryId = $request->input('category_id');
-        $name = $request->input('name'); 
+        $name = $request->input('name');
 
         $category = Category::find($categoryId);
 

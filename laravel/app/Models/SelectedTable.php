@@ -11,5 +11,5 @@ class SelectedTable extends Model
 
     protected $fillable = ['table_number', 'is_reserved'];
 
-    // Add any additional custom logic or relationships here
+   
 }
