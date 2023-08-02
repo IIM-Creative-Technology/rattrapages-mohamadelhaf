@@ -18,31 +18,30 @@ class CheckoutController extends Controller
     // Method to create a new cart record and store it in the database
     public function createCart(Request $request)
     {
-       
         $cartId = uniqid();
-
-       
+    
         \Log::info('Generated Cart ID: ' . $cartId);
-
+    
         try {
             // Create a new cart record in the database
             $cart = Cart::create([
                 'cart_id' => $cartId,
             ]);
-
-           
+    
             return response()->json([
                 'message' => 'Cart created successfully',
                 'cartId' => $cartId,
             ]);
         } catch (\Exception $e) {
-           
             \Log::error('Error creating cart: ' . $e->getMessage());
             return response()->json([
                 'message' => 'Error creating cart',
             ], 500);
         }
     }
+    
+
+  
 
     // Method to confirm the checkout and complete the purchase
     public function checkout(Request $request)
@@ -51,7 +50,7 @@ class CheckoutController extends Controller
         $cartId = $request->input('cart_id');
 
   
-        Cart::where('cart_id', $cartId)->delete();
+        // Cart::where('cart_id', $cartId)->delete();
 
         
         return Redirect::route('welcome')->with('success', 'Checkout successful! Thank you for your order.');

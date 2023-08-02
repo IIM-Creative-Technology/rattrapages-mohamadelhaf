@@ -15,12 +15,10 @@ class CartController extends Controller
         // Fetch all cart items from the database
         $cartItems = CartItem::all();
 
-        // Calculate the total count of unique categories in the cart_items table
-        $totalCategories = DB::table('cart_items')->distinct('category_id')->count();
 
         return Inertia::render('Cart', [
             'cartItems' => $cartItems,
-            'totalCategories' => $totalCategories,
+            
         ]);
     }
 
@@ -63,27 +61,27 @@ class CartController extends Controller
         ]);
     }
 
-    public function removeFromCart(Request $request)
-    {
-        $itemId = $request->input('item_id');
+    // public function removeFromCart(Request $request)
+    // {
+    //     $itemId = $request->input('item_id');
 
-        $cartItem = CartItem::find($itemId);
+    //     $cartItem = CartItem::find($itemId);
 
-        if (!$cartItem) {
-            return response()->json(['message' => 'Item not found in cart'], 404);
-        }
+    //     if (!$cartItem) {
+    //         return response()->json(['message' => 'Item not found in cart'], 404);
+    //     }
 
-        $cartItem->delete();
+    //     $cartItem->delete();
 
-        $cartItems = CartItem::all();
-        $cartTotal = $cartItems->count();
+    //     $cartItems = CartItem::all();
+    //     $cartTotal = $cartItems->count();
 
-        return response()->json([
-            'message' => 'Item removed from cart successfully',
-            'cartItems' => $cartItems,
-            'cartTotal' => $cartTotal,
-        ]);
-    }
+    //     return response()->json([
+    //         'message' => 'Item removed from cart successfully',
+    //         'cartItems' => $cartItems,
+    //         'cartTotal' => $cartTotal,
+    //     ]);
+    // }
 
     public function clearCart()
     {
